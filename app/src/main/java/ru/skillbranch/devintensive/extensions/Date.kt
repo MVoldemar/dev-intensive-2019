@@ -18,7 +18,7 @@ fun  Date.add(value:Int, units: TimeUnits = TimeUnits.SECOND):Date{
         TimeUnits.SECOND -> value * SECOND
         TimeUnits.MINUTE -> value * MINUTE
         TimeUnits.HOUR -> value * HOUR
-        TimeUnits.DAYS -> value * DAY
+        TimeUnits.DAY -> value * DAY
     }
     this.time = time
     return this
@@ -28,5 +28,5 @@ enum class TimeUnits{
    SECOND,
    MINUTE,
    HOUR,
-   DAYS
+   DAY
 }
