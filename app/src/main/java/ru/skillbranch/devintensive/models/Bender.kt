@@ -10,6 +10,9 @@ class Bender (var status : Status = Status.NORMAL, var question : Question = Que
                 Question.IDLE -> Question.IDLE.question
 
     }
+    private fun clearBender(){
+        question.question = Question.NAME.question
+    }
     fun listenAnswer(answer:String) : Pair<String, Triple<Int, Int, Int>>{
           return  if(question.answers.contains(answer)){
               question = question.nextQuestion()
@@ -17,7 +20,13 @@ class Bender (var status : Status = Status.NORMAL, var question : Question = Que
             }
         else {
             status = status.nextStatus()
-            "Это неправильный ответ\n${question.question}" to status.color
+              if (status == Status.NORMAL){
+                  clearBender()
+                  "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color}
+              else
+              {
+                  "Это неправильный ответ\n${question.question}" to status.color
+              }
         }
 
 
@@ -40,7 +49,7 @@ class Bender (var status : Status = Status.NORMAL, var question : Question = Que
             }
         }
     }
-    enum class Question(val question: String, val answers:List<String>) {
+    enum class Question(var question: String, val answers:List<String>) {
         NAME("Как меня зовут?", listOf("Бендер", "bender")) {
             override fun nextQuestion(): Question = PROFESSION
         },
