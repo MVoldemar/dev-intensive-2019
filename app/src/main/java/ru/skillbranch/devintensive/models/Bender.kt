@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.models
 
+import java.util.jar.Attributes
+
 class Bender (var status : Status = Status.NORMAL, var question : Question = Question.NAME) {
     fun askQuestion(): String = when(question){
                 Question.NAME -> Question.NAME.question
@@ -11,7 +13,7 @@ class Bender (var status : Status = Status.NORMAL, var question : Question = Que
 
     }
     private fun clearBender(){
-        question.question = Question.NAME.question
+        question=Question.NAME
     }
     fun listenAnswer(answer:String) : Pair<String, Triple<Int, Int, Int>>{
           return  if(question.answers.contains(answer)){
