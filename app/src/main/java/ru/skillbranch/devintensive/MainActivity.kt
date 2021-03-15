@@ -88,12 +88,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
     }
     override fun onClick(v: View?) {
         if(v?.id == R.id.iv_send){
-            sendMessage()
+            val (phrase, color)  =  benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
+            val (r, g, b) = color
+            benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+            textTxt.text = phrase
+            hideKeyboard()
         }
     }
     
 
-    fun Activity.hideKeyboard() {
+    private fun Activity.hideKeyboard() {
         this.currentFocus?.let { view ->
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             imm?.hideSoftInputFromWindow(view.windowToken, 0)
